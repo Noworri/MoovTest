@@ -1,0 +1,38 @@
+name: Deploy to FTP
+
+on:
+  push:
+    branches: [ "richard_v2" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+
+      #- name: Setup PHP
+        #uses: shivammathur/setup-php@v2
+        #with:
+          #php-version: '8.1'
+      #- name: Install Composer dependencies
+        #run: composer install
+
+      
+      #- name: Install Dependencies dd
+        #run: |
+           #php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+           #php composer-setup.php
+           #php -r "unlink('composer-setup.php');"
+           #php composer.phar install --no-dev
+      
+      - name: Deploy over FTP
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./
+          remote-dir: /api-test/
+          args: --delete
