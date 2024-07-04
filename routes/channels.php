@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Broadcast;
+
 /*
 |--------------------------------------------------------------------------
 | Broadcast Channels
@@ -11,18 +13,6 @@
 |
 */
 
-use Illuminate\Support\Facades\Broadcast;
-use Illuminate\Http\Request; 
-use Illuminate\Support\Facades\Log;
-
-Broadcast::channel('App.User.{id}', function ($user, $id) {
+Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
-});
-Broadcast::channel('channel', function (Request $request) {
-    Log::info('ROUTE CHANNEL', $request->all());
-    return true;
-});
-Broadcast::channel('private-channel', function (Request $request) {
-    Log::info('ROUTE CHANNEL', $request->all());
-    return true;
 });

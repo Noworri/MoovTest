@@ -1,22 +1,9 @@
-
 <?php
 
- 
-use Illuminate\Support\Facades\Route; 
-use App\Http\Controllers\MoovController; 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
-// use this in localc
-// header("Access-Control-Allow-Origin: *");
-// header('Access-Control-Allow-Methods: DELETE, GET, POST, OPTIONS, PUT');
-// header('Access-Control-Allow-Headers: Origin, Content-Type, Accept, Authorization, X-Request-With');
-// header('Access-Control-Allow-Credentials: true');
-
-// header("Access-Control-Allow-Headers: Content-Type, Accept");
-// header("Access-Control-Allow-Headers: *");
-// header("Access-Control-Allow-Origin: *");
-// header('content-type: application/json; charset=utf-8');
-// header('Access-Control-Allow-Methods','DELETE,GET,POST,OPTIONS,PUT');
-
+use App\Http\Controllers\MoovMoneyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,19 +11,31 @@ use App\Http\Controllers\MoovController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "api" middleware group. Make something great!
 |
 */
- 
-Route::post('moovcollection', [MoovController::class, 'moovCollection']);
-Route::post('moovtransactionstatus', [MoovController::class, 'getMoovCollectionStatus']);
-Route::post('moovtransfer', [MoovController::class, 'moovTransfer']);
-Route::post('moovmobilestatus', [MoovController::class, 'moovGetMobileStatus']);
-Route::post('moovcashintransaction', [MoovController::class, 'moovCashInTransaction']);
-Route::post('moovairtimetransaction', [MoovController::class, 'moovAirTimeTransaction']);
-Route::post('moovpushwithpending', [MoovController::class, 'moovPushWithPending']);
-Route::post('moovgetbalance', [MoovController::class, 'moovGetBalance']);
 
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    return $request->user();
+});
+
+Route::get('/example', function () {
+    return response()->json(['message' => 'Hello, world!']);
+});
 
  
+
+
+
+Route::post('moovcollection', [MoovMoneyController::class, 'moovCollection']);
+Route::post('moovtransfer', [MoovMoneyController::class, 'floozTransfer']);
+ 
+//Route::post('register', [MoovMoneyController::class, 'showStatusCodeError']);
+Route::post('moovpushwithpending', [MoovMoneyController::class, 'moovPushWithPending']);
+Route::post('moovcashintransaction', [MoovMoneyController::class, 'moovCashInTransaction']);
+
+Route::post('moovairtimetransaction', [MoovMoneyController::class, 'moovAirTimeTransaction']);
+Route::post('moovtransactionstatus', [MoovMoneyController::class, 'getMoovCollectionStatus']);
+Route::post('moovgetbalance', [MoovMoneyController::class, 'moovGetBalance']);
+Route::post('moovmobilestatus', [MoovMoneyController::class, 'moovGetMobileStatus']);

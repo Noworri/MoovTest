@@ -2,85 +2,29 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
 class Handler extends ExceptionHandler
 {
     /**
-     * A list of the exception types that are not reported.
+     * The list of the inputs that are never flashed to the session on validation exceptions.
      *
-     * @var array
-     */
-    protected $dontReport = [
-        //
-    ];
-
-    /**
-     * A list of the inputs that are never flashed for validation exceptions.
-     *
-     * @var array
+     * @var array<int, string>
      */
     protected $dontFlash = [
+        'current_password',
         'password',
         'password_confirmation',
     ];
 
-    
-    /* vtx
-    public function report(Exception $exception)
+    /**
+     * Register the exception handling callbacks for the application.
+     */
+    public function register(): void
     {
-        parent::report($exception);
+        $this->reportable(function (Throwable $e) {
+            //
+        });
     }
-    public function report(Throwable $exception)
-    {
-        parent::report($exception);
-    }*/
-
-    
-    /*
-    public function render($request, Exception $exception)
-    {
-        return parent::render($request, $exception);
-    }
-    public function render($request, Throwable $exception)
-    {
-        return parent::render($request, $exception);
-    }*/
-
-
-
-
-
-    public function report(Throwable $exception)
-    {
-        parent::report($exception);
-    }
-
-     
-    public function shouldReport(Throwable $exception)
-    {
-        return parent::shouldReport($exception);
-    }
-
-     
-    public function render($request, Throwable $exception)
-    {
-        return parent::render($request, $exception);
-    }
-
-     
-    public function renderForConsole($output, Throwable $exception)
-    {
-        parent::renderForConsole($output, $exception);
-    }
-
-
-
-
-
-
-
-     
 }
