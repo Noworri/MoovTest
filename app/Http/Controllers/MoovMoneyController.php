@@ -11,19 +11,13 @@ use Illuminate\Support\Facades\Log;
 
 class MoovMoneyController extends Controller
 {
-    //
-
-    /**
-     * JUSTE POUR L'INTERNE DE FLOW
-     *  
-     */
+    
 
      protected $USER2_TOKEN = '';
      protected $USER3_TOKEN = '';
      protected $USER4_TOKEN = '';
      public function __construct()
-    {
-        //$this->BASE_URL = 'https://orchard-api.anmgw.com';
+    { 
         $this->USER2_TOKEN = '';
         $this->USER3_TOKEN = '';
         $this->USER4_TOKEN = '';
